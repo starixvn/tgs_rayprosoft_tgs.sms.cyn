@@ -1,4 +1,6 @@
-﻿using System.Text.Json;
+﻿using System.Net;
+using System.Net.Http.Json;
+using System.Text.Json;
 using Google.Protobuf;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
@@ -65,7 +67,7 @@ public class HandleMessageTests
             {
                 Id = brandId,
                 SmsEnabled = true
-            });        
+            });
 
         var vendorInfo = new SmsVendorInfo<SmsSettings>(
             "CYN",
@@ -92,13 +94,18 @@ public class HandleMessageTests
         mockHttp.Expect("http://localhost/api/SendSMS")
             .WithContent(JsonSerializer.Serialize(dict))
             .Respond(
-                "application/json",
-                JsonSerializer.Serialize(new CYNSendSMSResponse(
-                    107048733,
-                    "S",
-                    "Message Submitted Sucessfully",
-                    null,
-                    "84898466792")));
+                HttpStatusCode.OK,
+                _ =>
+                {
+                    tcs.SetResult();
+
+                    return JsonContent.Create(new CYNSendSMSResponse(
+                        107048733,
+                        "S",
+                        "Message Submitted Sucessfully",
+                        null,
+                        "84898466792"));
+                });
 
         // Act
         await messageSender.PublishAsync("tgs.sms.cyn", request.ToByteArray());
