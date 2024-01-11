@@ -45,17 +45,17 @@ spec:
                 secretKeyRef:
                   name: tgs-connections
                   key: rabbitmq-url
-            - name: ChuanXin__RabbitMQ__UserName
+            - name: CYN__RabbitMQ__UserName
               valueFrom:
                 secretKeyRef:
                   name: tgs-connections
                   key: rabbitmq-user
-            - name: ChuanXin__RabbitMQ__Password
+            - name: CYN__RabbitMQ__Password
               valueFrom:
                 secretKeyRef:
                   name: tgs-connections
                   key: rabbitmq-pass
-            - name: ChuanXin__RabbitMQ__VirtualHost
+            - name: CYN__RabbitMQ__VirtualHost
               valueFrom:
                 secretKeyRef:
                   name: tgs-connections
