@@ -21,6 +21,8 @@ build-code:
   extends: .build-code-template
 
 unit-test:
+  variables:
+    Framework: net7.0
   extends: .unit-test-template
 
 push-docker-image:
