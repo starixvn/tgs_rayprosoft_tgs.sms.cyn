@@ -15,16 +15,9 @@ using Xunit.Abstractions;
 
 namespace Tgs.Sms.CYN.IntegrationTests;
 
-public class HandleMessageTests
+public class HandleMessageTests(ITestOutputHelper testOutputHelper)
 {
-    private readonly ITestOutputHelper _testOutputHelper;
-
-    public HandleMessageTests(ITestOutputHelper testOutputHelper)
-    {
-        _testOutputHelper = testOutputHelper ?? throw new ArgumentNullException(nameof(testOutputHelper));
-    }
-
-    [Fact]
+    [Fact(Timeout = 3000)]
     public async Task 處理傳送簡訊要求()
     {
         // Arrange
@@ -33,7 +26,7 @@ public class HandleMessageTests
 
         await using var web = CYNTestHost.Instance
             .WithWebHostBuilder(hostBuilder => hostBuilder
-                .ConfigureLogging(logging => logging.AddXUnit(_testOutputHelper))
+                .ConfigureLogging(logging => logging.AddXUnit(testOutputHelper))
                 .ConfigureServices(services => services
                     .AddSingleton(fakeBrandServiceClient)
                     .AddMessageQueue()
@@ -57,7 +50,9 @@ public class HandleMessageTests
         {
             BrandId = brandId,
             Content = message,
-            Destination = "+84898466792"
+            Destination = "+84898466792",
+            AreaCode = "+84",
+            Phone = "0898466792"
         };
 
         var messageSender = web.Services.GetRequiredService<IMessageSender>();
@@ -106,9 +101,10 @@ public class HandleMessageTests
                         null,
                         "84898466792"));
                 });
-
+    
         // Act
-        await messageSender.PublishAsync("tgs.sms.cyn", request.ToByteArray());
-        await tcs.Task.WaitAsync(TimeSpan.FromSeconds(1D));
+        await messageSender.PublishAsync<ReadOnlyMemory<byte>>("tgs.sms.cyn", request.ToByteArray());
+        await tcs.Task;
+
     }
 }

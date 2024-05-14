@@ -20,9 +20,7 @@ stages:
 build-code:
   extends: .build-code-template
 
-unit-test:
-  variables:
-    Framework: net7.0
+unit-test:  
   extends: .unit-test-template
 
 push-docker-image:

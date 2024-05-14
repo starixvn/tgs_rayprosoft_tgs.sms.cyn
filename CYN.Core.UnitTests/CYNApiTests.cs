@@ -107,7 +107,7 @@ public class CYNApiTests
             { "sms_type", smsType },
             { "encoding", "T" },
             { "sender_id", senderId },
-            { "phonenumber", phone.TrimStart('+') },
+            { "phonenumber", phone },
             { "textmessage", message },
         };
 
@@ -123,6 +123,6 @@ public class CYNApiTests
                     "84898466792")));
 
         // Act
-        await sut.SendMessageAsync(apiId, apiPassword, senderId, smsType, "+" + phone, message);
+        await sut.SendMessageAsync(apiId, apiPassword, senderId, smsType, phone, message);
     }
 }
