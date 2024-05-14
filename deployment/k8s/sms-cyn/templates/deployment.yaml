@@ -62,7 +62,7 @@ spec:
                   key: rabbitmq-vhost
           ports:
             - name: http
-              containerPort: {{ .Values.service.port }}
+              containerPort: 8080
               protocol: TCP
           volumeMounts:
             - mountPath: /app/appsettings.Production.json

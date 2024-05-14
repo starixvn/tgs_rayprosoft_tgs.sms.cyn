@@ -79,6 +79,6 @@ public class CYNReceiveHandlerTests
                     "84898466792")));
 
         // Act
-        await sut.HandleAsync(request.ToByteArray());
+        await sut.HandleAsync("test", request.ToByteArray(), null);
     }
 }
