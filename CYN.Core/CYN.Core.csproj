@@ -11,8 +11,8 @@
 	<ItemGroup>
 		<PackageReference Include="PhoenixToolkits.MessageQueue" Version="1.0.3" />
 		<PackageReference Include="System.Interactive.Async" Version="6.0.1" />
-		<PackageReference Include="Tgs.BrandCertificateClient" Version="0.0.28" />
-		<PackageReference Include="TGS.SmsReceiver" Version="0.0.6" />
+		<PackageReference Include="Tgs.BrandCertificateClient" Version="0.1.6" />
+		<PackageReference Include="TGS.SmsReceiver" Version="0.1.1" />
 	</ItemGroup>
 
 </Project>

@@ -71,7 +71,7 @@ internal class CYNReceiveHandler : IMessageHandler
 			smsInfo.SmsSettings.ApiPassword,
 			smsInfo.SmsSettings.SenderId,
 			smsInfo.SmsSettings.SmsType,
-			shortMsg.Destination,
+			$"{shortMsg.AreaCode.TrimStart('+')}{shortMsg.Phone.TrimStart('0')}",
 			shortMsg.Content,
 			cancellationToken).ConfigureAwait(false);
 	}

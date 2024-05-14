@@ -31,7 +31,7 @@ internal class CYNApi
 			{ "sms_type", smsType },
 			{ "encoding", "T" },
 			{ "sender_id", senderId },
-			{ "phonenumber", phone.TrimStart('+') },
+			{ "phonenumber", phone },
 			{ "textmessage", message },
 		};
 

@@ -57,7 +57,9 @@ public class HandleMessageTests
         {
             BrandId = brandId,
             Content = message,
-            Destination = "+84898466792"
+            Destination = "+84898466792",
+            AreaCode = "+84",
+            Phone = "0898466792"
         };
 
         var messageSender = web.Services.GetRequiredService<IMessageSender>();

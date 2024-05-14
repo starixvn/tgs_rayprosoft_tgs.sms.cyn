@@ -31,7 +31,9 @@ public class CYNReceiveHandlerTests
         {
             BrandId = brandId,
             Content = "Your ID verification code is : 123456",
-            Destination = "+84898466792"
+            Destination = "+84898466792",
+            AreaCode = "+84",
+            Phone = "0898466792"
         };
 
         _ = fakeBrandServiceClient.GetBrandInfoAsync(Arg.Is(brandId))
@@ -61,7 +63,7 @@ public class CYNReceiveHandlerTests
             { "sms_type", smsType },
             { "encoding", "T" },
             { "sender_id", senderId },
-            { "phonenumber", phone.TrimStart('+') },
+            { "phonenumber", phone },
             { "textmessage", message },
         };
 
